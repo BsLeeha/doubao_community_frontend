@@ -13,7 +13,7 @@ export function getArticleList(pageNo, size, type) {
 export function postArticle(topic) {
   return request({
     url: '/article/create',
-    method: 'article',
+    method: 'post',
     data: topic
   })
 }
@@ -43,7 +43,7 @@ export function getRecommendTopics(id) {
 export function updateArticle(topic) {
   return request({
     url: '/article/update',
-    method: 'article',
+    method: 'post',
     data: topic
   })
 }
