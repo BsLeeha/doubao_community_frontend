@@ -24,16 +24,16 @@ const routes = [
   },
   // 发布
   {
-    name: "post-create",
-    path: "/post/create",
-    component: () => import("@/views/post/Create"),
+    name: "article-create",
+    path: "/article/create",
+    component: () => import("@/views/article/Create"),
     meta: { title: "信息发布", requireAuth: true },
   },
   // 编辑
   {
     name: 'topic-edit',
     path: '/topic/edit/:id',
-    component: () => import('@/views/post/Edit'),
+    component: () => import('@/views/article/Edit'),
     meta: {
       title: '编辑',
       requireAuth: true
@@ -41,9 +41,9 @@ const routes = [
   },
   // 详情
   {
-    name: "post-detail",
-    path: "/post/:id",
-    component: () => import("@/views/post/Detail"),
+    name: "article-detail",
+    path: "/article/:id",
+    component: () => import("@/views/article/Detail"),
     meta: { title: "详情" },
   },
   {

@@ -9,14 +9,14 @@
         <article v-for="(item, index) in list" :key="index" class="media">
           <div class="media-left">
             <figure class="image is-48x48">
-              <img :src="`https://cn.gravatar.com/avatar/${item.userId}?s=164&d=monsterid`"> 
+              <img :src="`https://cn.gravatar.com/avatar/${item.userId}?s=164&d=monsterid`">
             </figure>
           </div>
           <div class="media-content">
             <div class="">
               <p class="ellipsis is-ellipsis-1">
                 <el-tooltip class="item" effect="dark" :content="item.title" placement="top">
-                  <router-link :to="{name:'post-detail',params:{id:item.id}}">
+                  <router-link :to="{name:'article-detail',params:{id:item.id}}">
                     <span class="is-size-6">{{ item.title }}</span>
                   </router-link>
                 </el-tooltip>

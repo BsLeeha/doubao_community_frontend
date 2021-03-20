@@ -1,6 +1,7 @@
 <template>
   <div class="member">
     <div class="columns">
+      <!-- 个人基本信息栏 -->
       <div class="column is-one-quarter">
         <el-card shadow="never">
           <div slot="header" class="has-text-centered">
@@ -15,6 +16,7 @@
         </el-card>
       </div>
 
+      <!-- 个人其他信息栏：发布的话题登 -->
       <div class="column">
         <!--用户发布的话题-->
         <el-card class="box-card content" shadow="never">
@@ -31,7 +33,7 @@
               <div class="media-content">
                 <div class="content ellipsis is-ellipsis-1">
                   <el-tooltip class="item" effect="dark" :content="item.title" placement="top">
-                    <router-link :to="{ name: 'post-detail', params: { id: item.id } }">
+                    <router-link :to="{ name: 'article-detail', params: { id: item.id } }">
                       {{ item.title }}
                     </router-link>
                   </el-tooltip>
@@ -80,7 +82,7 @@
 import { getInfoByName } from '@/api/user'
 import pagination from '@/components/Pagination/index'
 import { mapGetters } from 'vuex'
-import { deleteTopic } from '@/api/post'
+import { deleteArticle } from '@/api/article'
 
 export default {
   name: 'Profile',
@@ -114,7 +116,7 @@ export default {
       })
     },
     handleDelete(id) {
-      deleteTopic(id).then(value => {
+      deleteArticle(id).then(value => {
         const { code, message } = value
         alert(message)
 
