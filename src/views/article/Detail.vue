@@ -149,5 +149,6 @@ export default {
 <style>
 #preview {
   min-height: 300px;
+  font-size: inherit;
 }
 </style>
