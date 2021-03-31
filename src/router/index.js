@@ -31,8 +31,8 @@ const routes = [
   },
   // 编辑
   {
-    name: 'topic-edit',
-    path: '/topic/edit/:id',
+    name: 'article-edit',
+    path: '/article/edit/:id',
     component: () => import('@/views/article/Edit'),
     meta: {
       title: '编辑',

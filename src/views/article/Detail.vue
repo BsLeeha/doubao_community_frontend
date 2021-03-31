@@ -11,13 +11,13 @@
           slot="header"
           class="has-text-centered"
         >
-          <p class="is-size-5 has-text-weight-bold">{{ topic.title }}</p>
+          <p class="is-size-5 has-text-weight-bold">{{ article.title }}</p>
           <div class="has-text-grey is-size-7 mt-3">
-            <span>{{ dayjs(topic.createTime).format('YYYY/MM/DD HH:mm:ss') }}</span>
+            <span>{{ dayjs(article.createTime).format('YYYY/MM/DD HH:mm:ss') }}</span>
             <el-divider direction="vertical" />
-            <span>发布者：{{ topicUser.alias }}</span>
+            <span>发布者：{{ author.alias }}</span>
             <el-divider direction="vertical" />
-            <span>查看：{{ topic.view }}</span>
+            <span>查看：{{ article.viewCnt }}</span>
           </div>
         </div>
 
@@ -32,48 +32,48 @@
                 <router-link
                   v-for="(tag, index) in tags"
                   :key="index"
-                  :to="{ name: 'tag', params: { name: tag.name } }"
+                  :to="{ name: 'tag', params: { name: tag.tagName } }"
                 >
                   <b-tag type="is-info is-light mr-1">
-                    {{ "#" + tag.name }}
+                    {{ "#" + tag.tagName }}
                   </b-tag>
                 </router-link>
               </b-taglist>
             </p>
           </div>
           <div
-            v-if="token && user.id === topicUser.id"
+            v-if="token && user.id === author.id"
             class="level-right"
           >
             <router-link
               class="level-item"
-              :to="{name:'topic-edit',params: {id:topic.id}}"
+              :to="{name:'article-edit',params: {id:article.id}}"
             >
               <span class="tag">编辑</span>
             </router-link>
             <a class="level-item">
               <span
                 class="tag"
-                @click="handleDelete(topic.id)"
+                @click="handleDelete(article.id)"
               >删除</span>
             </a>
           </div>
         </nav>
       </el-card>
 
-      <lv-comments :slug="topic.id" />
+      <lv-comments :slug="article.id" />
     </div>
 
     <div class="column">
       <!--作者-->
       <Author
         v-if="flag"
-        :user="topicUser"
+        :user="author"
       />
       <!--推荐-->
       <recommend
         v-if="flag"
-        :topic-id="topic.id"
+        :article-id="article.id"
       />
     </div>
   </div>
@@ -99,16 +99,16 @@ export default {
   data() {
     return {
       flag: false,
-      topic: {
+      article: {
         content: '',
         id: this.$route.params.id
       },
       tags: [],
-      topicUser: {}
+      author: {}
     }
   },
   mounted() {
-    this.fetchTopic()
+    this.fetchArticle()
   },
   methods: {
     renderMarkdown(md) {
@@ -117,16 +117,16 @@ export default {
       })
     },
     // 初始化
-    async fetchTopic() {
+    async fetchArticle() {
       getArticle(this.$route.params.id).then(response => {
         const { data } = response
-        document.title = data.topic.title
+        document.title = data.article.title
 
-        this.topic = data.topic
+        this.article = data.article
         this.tags = data.tags
-        this.topicUser = data.user
+        this.author = data.user
         // this.comments = data.comments
-        this.renderMarkdown(this.topic.content)
+        this.renderMarkdown(this.article.content)
         this.flag = true
       })
     },

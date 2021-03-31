@@ -10,11 +10,11 @@ export function getArticleList(pageNo, size, type) {
 }
 
 // 发布
-export function postArticle(topic) {
+export function postArticle(article) {
   return request({
     url: '/article/create',
     method: 'post',
-    data: topic
+    data: article
   })
 }
 
@@ -30,21 +30,21 @@ export function getArticle(id) {
 }
 
 // 获取详情页推荐
-export function getRecommendTopics(id) {
+export function getRecommendArticles(articleId) {
   return request({
     url: '/article/recommend',
     method: 'get',
     params: {
-      articleId: id
+      articleId: articleId
     }
   })
 }
 
-export function updateArticle(topic) {
+export function updateArticle(article) {
   return request({
     url: '/article/update',
     method: 'post',
-    data: topic
+    data: article
   })
 }
 

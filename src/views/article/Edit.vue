@@ -7,10 +7,10 @@
             <span><i class="fa fa fa-book"> 主题 / 更新主题</i></span>
           </div>
           <div>
-            <el-form :model="topic" ref="topic" class="demo-topic">
+            <el-form :model="article" ref="article" class="demo-topic">
               <el-form-item prop="title">
                 <el-input
-                  v-model="topic.title"
+                  v-model="article.title"
                   placeholder="输入新的主题名称"
                 ></el-input>
               </el-form-item>
@@ -30,7 +30,7 @@
                 <el-button type="primary" @click="handleUpdate()"
                   >更新
                 </el-button>
-                <el-button @click="resetForm('topic')">重置</el-button>
+                <el-button @click="resetForm('article')">重置</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -46,16 +46,16 @@ import Vditor from "vditor";
 import "vditor/dist/index.css";
 
 export default {
-  name: "TopicEdit",
+  name: "articleEdit",
   components: {},
   data() {
     return {
-      topic: {},
+      article: {},
       tags: [],
     };
   },
   created() {
-    this.fetchTopic();
+    this.fetchArticle();
   },
   methods: {
     renderMarkdown(md) {
@@ -71,16 +71,16 @@ export default {
         },
       });
     },
-    fetchTopic() {
+    fetchArticle() {
       getArticle(this.$route.params.id).then((value) => {
-        this.topic = value.data.topic;
-        this.tags = value.data.tags.map(tag => tag.name);
-        this.renderMarkdown(this.topic.content);
+        this.article = value.data.article;
+        this.tags = value.data.tags.map(tag => tag.tagName);
+        this.renderMarkdown(this.article.content);
       });
     },
     handleUpdate: function () {
-      this.topic.content = this.contentEditor.getValue();
-      updateArticle(this.topic).then((response) => {
+      this.article.content = this.contentEditor.getValue();
+      updateArticle(this.article).then((response) => {
         const { data } = response;
         console.log(data);
         setTimeout(() => {

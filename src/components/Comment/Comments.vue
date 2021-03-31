@@ -14,7 +14,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { fetchCommentsByTopicId } from '@/api/comment'
+import { fetchCommentsByArticleId } from '@/api/comment'
 import LvCommentsForm from './CommentsForm'
 import LvCommentsItem from './CommentsItem'
 
@@ -45,9 +45,8 @@ export default {
   },
   methods: {
     // 初始化
-    async fetchComments(topic_id) {
-      console.log(topic_id)
-      fetchCommentsByTopicId(topic_id).then(response => {
+    async fetchComments(articleId) {
+      fetchCommentsByArticleId(articleId).then(response => {
         const { data } = response
         this.comments = data
       })

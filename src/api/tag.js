@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getTopicsByTag(paramMap) {
+export function getArticlesByTag(paramMap) {
   return request({
     url: '/tag/' + paramMap.name,
     method: 'get',

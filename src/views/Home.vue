@@ -3,7 +3,7 @@
     <div class="box">🔔 {{ billboard.content }}</div>
     <div class="columns">
       <div class="column is-three-quarters">
-        <TopicList></TopicList>
+        <ArticleList></ArticleList>
       </div>
       <div class="column">
         <CardBar></CardBar>
@@ -15,11 +15,11 @@
 <script>
 import { getBillboard } from "@/api/billboard";
 import CardBar from "@/views/card/CardBar"
-import PostList from '@/views/article/Index'
+import ArticleList from '@/views/article/Index'
 
 export default {
   name: "Home",
-  components: {CardBar, TopicList: PostList},
+  components: {CardBar, ArticleList: ArticleList},
   data() {
     return {
       billboard: {

@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import { getRecommendTopics } from '@/api/article'
+import { getRecommendArticles } from '@/api/article'
 
 export default {
   name: 'Recommend',
   props: {
-    topicId: {
+    articleId: {
       type: String,
       default: null
     }
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     fetchRecommendTopics() {
-      getRecommendTopics(this.topicId).then(value => {
+      getRecommendArticles(this.articleId).then(value => {
         const { data } = value
         this.recommend = data
       })

@@ -6,23 +6,23 @@
       </div>
       <div class="has-text-centered">
         <p class="is-size-5 mb-5">
-          <router-link :to="{ path: `/member/${user.username}/home` }">
+          <router-link :to="{ path: '/member/${user.username}/home' }">
             {{ user.alias }} <span class="is-size-7 has-text-grey">{{ '@' + user.username }}</span>
           </router-link>
         </p>
         <div class="columns is-mobile">
           <div class="column is-half">
-            <code>{{ user.topicCount }}</code>
+            <code>{{ user.articleCnt }}</code>
             <p>文章</p>
           </div>
           <div class="column is-half">
-            <code>{{ user.followerCount }}</code>
+            <code>{{ user.followerCnt }}</code>
             <p>粉丝</p>
           </div>
         </div>
         <div>
           <button
-            v-if="hasFollow"
+            v-if="isFollow"
             class="button is-success button-center is-fullwidth"
             @click="handleUnFollow(user.id)"
           >
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { follow, hasFollow, unFollow } from '@/api/follow'
+import { follow, isFollow, unFollow } from '@/api/follow'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Author',
@@ -51,11 +51,12 @@ export default {
   },
   data() {
     return {
-      hasFollow: false
+      isFollow: false, // 是否已关注
+      isSelf: false      // 是否是用户自己
     }
   },
   mounted() {
-    this.fetchInfo()
+    this.fetchInfo();
   },
   computed: {
     ...mapGetters([
@@ -64,11 +65,11 @@ export default {
   },
   methods: {
     fetchInfo() {
-      if(this.token != null && this.token !== '')
+      if (this.token != null && this.token !== '')
       {
-        hasFollow(this.user.id).then(value => {
+        isFollow(this.user.id).then(value => {
           const { data } = value
-          this.hasFollow = data.hasFollow
+          this.isFollow = data.isFollow
         })
       }
     },
@@ -78,8 +79,8 @@ export default {
         follow(id).then(response => {
           const { message } = response
           this.$message.success(message)
-          this.hasFollow = !this.hasFollow
-          this.user.followerCount = parseInt(this.user.followerCount) + 1
+          this.isFollow = !this.isFollow
+          this.user.followerCnt = parseInt(this.user.followerCnt) + 1
         })
       }
       else{
@@ -90,8 +91,8 @@ export default {
       unFollow(id).then(response => {
         const { message } = response
         this.$message.success(message)
-        this.hasFollow = !this.hasFollow
-        this.user.followerCount = parseInt(this.user.followerCount) - 1
+        this.isFollow = !this.isFollow
+        this.user.followerCnt = parseInt(this.user.followerCnt) - 1
       })
     }
   }

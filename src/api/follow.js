@@ -1,25 +1,25 @@
 import request from '@/utils/request'
 
 // 关注
-export function follow(id) {
+export function follow(userId) {
   return request(({
-    url: `/relationship/subscribe/${id}`,
+    url: `/relationship/follow/${userId}`,
     method: 'get'
   }))
 }
 
 // 关注
-export function unFollow(id) {
+export function unFollow(userId) {
   return request(({
-    url: `/relationship/unsubscribe/${id}`,
+    url: `/relationship/unfollow/${userId}`,
     method: 'get'
   }))
 }
 
 // 验证是否关注
-export function hasFollow(topicUserId) {
+export function isFollow(followUserId) {
   return request(({
-    url: `/relationship/validate/${topicUserId}`,
+    url: '/relationship/isfollow/${followUserId}',
     method: 'get'
   }))
 }

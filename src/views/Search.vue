@@ -38,12 +38,12 @@
                     :key="index"
                     class="tag is-hidden-mobile is-success is-light mr-1"
                   >
-                    <router-link :to="{ name: 'tag', params: { name: tag.name } }">
-                      {{ "#" + tag.name }}
+                    <router-link :to="{ name: 'tag', params: { name: tag.tagName } }">
+                      {{ "#" + tag.tagName }}
                     </router-link>
                   </span>
 
-                  <span class="is-hidden-mobile">浏览:{{ item.view }}</span>
+                  <span class="is-hidden-mobile">浏览:{{ item.viewCnt }}</span>
                 </div>
               </div>
             </nav>
